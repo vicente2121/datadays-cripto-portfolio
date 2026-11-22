@@ -6,14 +6,14 @@ La solución está en la carpeta `01-Criptomonedas` del [workspace Data Days](ht
 
 ```mermaid
 flowchart LR
-  A[CoinGecko API\ncoins/markets] --> B[NB Bronze\nJSON original + batch_id]
+  A[CoinGecko API<br/>coins/markets] --> B[NB Bronze<br/>JSON original + batch_id]
   B --> C[bronze.mercado_raw]
-  C --> D[NB Silver\ntipos y siete controles]
+  C --> D[NB Silver<br/>tipos y siete controles]
   D --> E[silver.mercado_actual]
   D --> R[silver.rechazos_actuales]
-  E --> F[NB Gold\nconciliación y estrella]
-  F --> G[gold.fact_mercado_actual\ny dimensiones]
-  G --> H[SM01_ObservatorioCripto\nDirect Lake]
+  E --> F[NB Gold<br/>conciliación y estrella]
+  F --> G[gold.fact_mercado_actual<br/>y dimensiones]
+  G --> H[SM01_ObservatorioCripto<br/>Direct Lake]
   H --> I[Informe Power BI]
   H --> J[Informe dentro de la Fabric App]
 ```
