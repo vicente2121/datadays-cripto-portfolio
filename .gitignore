@@ -45,3 +45,4 @@ rayfin.config.json
 *.njsproj
 *.sln
 *.sw?
+.playwright-cli/

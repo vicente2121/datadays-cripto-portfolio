@@ -1,0 +1,124 @@
+/// Hecho central: una observación por activo y lote actual. Claves a Activos, Fechas y Lotes. Precio y variación no son aditivos. Double conserva precios pequeños y precisión reportada.
+table Mercado
+
+	/// Activos con observación en el contexto seleccionado.
+	measure Activos = DISTINCTCOUNT('Mercado'[activo_key])
+		formatString: 0
+		displayFolder: Mercado
+
+	/// Capitalización reportada de los activos seleccionados.
+	measure 'Capitalización USD' = SUM('Mercado'[capitalizacion_usd])
+		formatString: #,0
+		displayFolder: Mercado
+
+	/// Volumen reportado por la fuente, no liquidez garantizada.
+	measure 'Volumen 24h USD' = SUM('Mercado'[volumen_24h_usd])
+		formatString: #,0
+		displayFolder: Mercado
+
+	/// Top 10 dividido entre la muestra del lote. Ignora solo Activos; conserva Fecha y Lote.
+	measure 'Concentración top 10' =
+			VAR _top = CALCULATE(SUM('Mercado'[capitalizacion_usd]), REMOVEFILTERS('Activos'), 'Mercado'[posicion_muestra] <= 10)
+			VAR _universo = CALCULATE(SUM('Mercado'[capitalizacion_usd]), REMOVEFILTERS('Activos'))
+			RETURN DIVIDE(_top, _universo)
+		formatString: 0.00%
+		displayFolder: Mercado
+
+	/// Capitalización de los diez líderes. Fuera del top 10 devuelve blanco.
+	measure 'Capitalización top 10 USD' = CALCULATE([Capitalización USD], KEEPFILTERS('Mercado'[posicion_muestra] <= 10))
+		formatString: #,0
+		displayFolder: Mercado
+
+	/// Precio de un solo activo; no se suman precios.
+	measure 'Precio USD' = IF(HASONEVALUE('Activos'[activo_key]), SELECTEDVALUE('Mercado'[precio_usd]))
+		formatString: 0.########
+		displayFolder: Mercado
+
+	/// Porcentaje reportado por CoinGecko, escalado una sola vez; no rentabilidad de cartera.
+	measure 'Variación 24h' = IF(HASONEVALUE('Activos'[activo_key]), DIVIDE(SELECTEDVALUE('Mercado'[variacion_24h_pct]), 100))
+		formatString: +0.00%;-0.00%;0.00%
+		displayFolder: Mercado
+
+	/// Última actualización de la fuente en los activos del contexto.
+	measure 'Fuente UTC' = FORMAT(MAX('Mercado'[actualizado_fuente_utc]), "yyyy-MM-dd HH:mm:ss")
+		formatString: @
+		displayFolder: Fechas
+
+	column activo_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: activo_key
+
+	column fecha_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+	column lote_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: lote_key
+
+	column precio_usd
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: precio_usd
+
+	column capitalizacion_usd
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: capitalizacion_usd
+
+	column volumen_24h_usd
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: volumen_24h_usd
+
+	column variacion_24h_pct
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: variacion_24h_pct
+
+	column participacion_muestra
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: participacion_muestra
+
+	column ranking_fuente
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ranking_fuente
+
+	column posicion_muestra
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: posicion_muestra
+
+	column actualizado_fuente_utc
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-MM-dd HH:mm:ss
+		summarizeBy: none
+		sourceColumn: actualizado_fuente_utc
+
+	partition Mercado = entity
+		mode: directLake
+		source
+			entityName: fact_mercado_actual
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

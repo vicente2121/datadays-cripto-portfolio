@@ -1,0 +1,66 @@
+/// Hecho de carga: una fila por lote publicado. Histórico de conteos sin relaciones con otros hechos.
+table Ejecuciones
+
+	/// Conteo de los lotes seleccionados. El informe filtra el lote actual.
+	measure 'Filas recibidas' = SUM('Ejecuciones'[filas_recibidas])
+		formatString: 0
+		displayFolder: Carga
+
+	/// Conteo de los lotes seleccionados. El informe filtra el lote actual.
+	measure 'Filas aceptadas' = SUM('Ejecuciones'[filas_aceptadas])
+		formatString: 0
+		displayFolder: Carga
+
+	/// Conteo de los lotes seleccionados. El informe filtra el lote actual.
+	measure 'Filas rechazadas' = SUM('Ejecuciones'[filas_rechazadas])
+		formatString: 0
+		displayFolder: Carga
+
+	column filas_recibidas
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: filas_recibidas
+
+	column filas_aceptadas
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: filas_aceptadas
+
+	column filas_rechazadas
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: filas_rechazadas
+
+	column tamano_solicitado
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: tamano_solicitado
+
+	column lote_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: lote_key
+
+	column fecha_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+	partition Ejecuciones = entity
+		mode: directLake
+		source
+			entityName: fact_ejecuciones
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

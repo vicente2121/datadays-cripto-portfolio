@@ -1,0 +1,55 @@
+/// Dimensión Fecha: años completos y continuos. Día UTC de procesamiento del lote.
+table Fechas
+	dataCategory: Time
+
+	column fecha_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+	column fecha
+		dataType: dateTime
+		isUnique
+		formatString: dd/MM/yyyy
+		summarizeBy: none
+		sourceColumn: fecha
+
+	column anio
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: anio
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: trimestre
+
+	column mes_numero
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: mes_numero
+
+	column mes
+		dataType: string
+		summarizeBy: none
+		sourceColumn: mes
+		sortByColumn: mes_numero
+
+	column dia
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: dia
+
+	partition Fechas = entity
+		mode: directLake
+		source
+			entityName: dim_fecha
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

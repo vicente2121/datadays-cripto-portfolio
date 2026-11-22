@@ -2,6 +2,8 @@
 
 Fabric App tipo portafolio del caso 01 de DP-600: una fotografía de mercado de CoinGecko que atraviesa Bronze, Silver y Gold antes de llegar a Power BI. La app explica la arquitectura, las reglas de calidad, las preguntas de negocio y los límites de la muestra. **No presenta cotizaciones en directo.**
 
+**Publicado:** [Fabric App](https://early-tower-5ef68d90a6-spaincentral.webapp.fabricapps.net) · [Informe Power BI](https://app.fabric.microsoft.com/groups/0245bb51-e0d1-40f1-b071-fcbbf1d7b155/reports/eddcc051-24e7-47ed-b95b-10408e2c7890) · workspace `DataDays-FabricApps-Portfolio-DEV` / carpeta `01-Criptomonedas`.
+
 ## Explora la solución
 
 | Parte | Contenido |
@@ -10,6 +12,7 @@ Fabric App tipo portafolio del caso 01 de DP-600: una fotografía de mercado de 
 | [`case-source/notebooks/`](case-source/notebooks/) | Extracción, tipado, controles, estrella Gold y refresco |
 | [`case-source/pipelines/`](case-source/pipelines/) | Orquestación del lote y avisos |
 | [`case-source/powerbi/`](case-source/powerbi/) | PBIP con informe PBIR y modelo TMDL Direct Lake |
+| [`fabric/`](fabric/) | Copias de despliegue enlazadas al Lakehouse y modelo publicados |
 | [`case-source/preguntas_de_negocio.md`](case-source/preguntas_de_negocio.md) | Requisitos, reglas y criterios de aceptación |
 | [`docs/proyecto.md`](docs/proyecto.md) | Workspace, carpeta e inventario de recursos de esta app |
 

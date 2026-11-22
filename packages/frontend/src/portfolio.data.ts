@@ -7,6 +7,7 @@ export interface PortfolioData {
   intro: string;
   disclosure: string;
   sourceUrl: string;
+  reportUrl: string;
   flow: string;
   metrics: { value: string; label: string }[];
   domain: string;
@@ -33,6 +34,7 @@ export const caseStudy: PortfolioData = {
   intro: 'De CoinGecko a Microsoft Fabric: una foto validada del mercado, con origen, controles y significado visibles antes de llegar a Power BI.',
   disclosure: 'Portafolio documental del caso docente. No muestra cotizaciones en directo.',
   sourceUrl: `${source}/tree/main/${path}`,
+  reportUrl: 'https://app.fabric.microsoft.com/groups/0245bb51-e0d1-40f1-b071-fcbbf1d7b155/reports/eddcc051-24e7-47ed-b95b-10408e2c7890',
   flow: 'COINGECKO → BRONZE → SILVER → GOLD → POWER BI',
   metrics: [
     { value: '100', label: 'activos como máximo por extracción' },
@@ -59,12 +61,13 @@ export const caseStudy: PortfolioData = {
   ],
   limit: 'El pipeline entregado es manual. La solución no implementa histórico analítico de cotizaciones, cartera ni seguridad de producción. CoinGecko puede imponer límites o autenticación; esta app no simula datos cuando la fuente no responde.',
   artifacts: [
+    { title: 'Informe en Fabric', description: 'Mercado, calidad y trazabilidad sobre Direct Lake', href: 'https://app.fabric.microsoft.com/groups/0245bb51-e0d1-40f1-b071-fcbbf1d7b155/reports/eddcc051-24e7-47ed-b95b-10408e2c7890', kind: 'repo' },
     { title: 'Preguntas de negocio', description: 'Alcance, reglas y criterios de aceptación', href: `${source}/blob/main/${path}/preguntas_de_negocio.md`, kind: 'guide' },
     { title: 'Notebooks', description: 'Extracción, calidad y modelo Gold', href: `${source}/tree/main/${path}/notebooks`, kind: 'code' },
     { title: 'Pipeline', description: 'Orquestación y avisos del lote', href: `${source}/tree/main/${path}/pipelines`, kind: 'code' },
     { title: 'Proyecto Power BI', description: 'Informe PBIR y modelo TMDL Direct Lake', href: `${source}/tree/main/${path}/powerbi`, kind: 'repo' },
   ],
-  replicaTitle: 'Una réplica aislada por workspace.',
+  replicaTitle: 'Este caso en el workspace compartido.',
   replicaSteps: ['Crea un Lakehouse con esquemas e importa los tres notebooks.', 'Materializa Gold antes de conectar el modelo Direct Lake.', 'Sustituye los identificadores de workspace, Lakehouse y notebooks en las plantillas.', 'Ejecuta los lotes en serie y verifica latest.json, calidad y el filtro de Bitcoin.'],
   footer: 'CASO 01 / CRIPTOMONEDAS',
 };

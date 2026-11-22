@@ -1,0 +1,14 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+
+ref table Ejecuciones
+ref table Controles
+ref table Trazabilidad
+ref table Activos
+ref table Fechas
+ref table Lotes
+ref table 'Reglas de calidad'
+ref table Mercado

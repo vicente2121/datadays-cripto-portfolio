@@ -1,0 +1,9 @@
+expression 'Origen OneLake' =
+        let
+            WorkspaceId = "0245bb51-e0d1-40f1-b071-fcbbf1d7b155",
+            LakehouseId = "26e6bd01-2f27-438f-b81a-e19538df7948",
+            Source = AzureStorage.DataLake(
+                "https://onelake.dfs.fabric.microsoft.com/" & WorkspaceId & "/" & LakehouseId,
+                [HierarchicalNavigation=true])
+        in
+            Source

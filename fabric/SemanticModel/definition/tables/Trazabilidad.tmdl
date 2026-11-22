@@ -1,0 +1,49 @@
+/// Utilidad documental desconectada: 32 criterios del Excel. No filtra hechos ni acredita ejecuciones.
+table Trazabilidad
+
+	column hoja
+		dataType: string
+		summarizeBy: none
+		sourceColumn: hoja
+
+	column columna
+		dataType: string
+		summarizeBy: none
+		sourceColumn: columna
+
+	column criterio
+		dataType: string
+		summarizeBy: none
+		sourceColumn: criterio
+
+	column pregunta
+		dataType: string
+		summarizeBy: none
+		sourceColumn: pregunta
+
+	column fase
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fase
+
+	column artefacto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: artefacto
+
+	column aplicacion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: aplicacion
+
+	column evidencia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: evidencia
+
+	partition Trazabilidad = entity
+		mode: directLake
+		source
+			entityName: trazabilidad
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

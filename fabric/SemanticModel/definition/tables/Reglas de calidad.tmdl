@@ -1,0 +1,31 @@
+/// Dimensión Regla: una fila por control, con descripción y fase. Observaciones en Controles.
+table 'Reglas de calidad'
+
+	column control_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: control_key
+
+	column control_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: control_id
+
+	column fase
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fase
+
+	column regla
+		dataType: string
+		summarizeBy: none
+		sourceColumn: regla
+
+	partition 'Reglas de calidad' = entity
+		mode: directLake
+		source
+			entityName: dim_control
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

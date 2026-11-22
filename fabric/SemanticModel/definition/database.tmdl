@@ -1,0 +1,4 @@
+database SM01_ObservatorioCripto
+	compatibilityLevel: 1604
+	compatibilityMode: powerBI
+	language: 1033
