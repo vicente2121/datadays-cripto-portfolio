@@ -1,0 +1,180 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "NB01_Bronze",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.00:20:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "<NOTEBOOK_BRONZE_ID>",
+          "workspaceId": "<WORKSPACE_ID>"
+        }
+      },
+      {
+        "name": "NB02_Silver",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "NB01_Bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:20:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "<NOTEBOOK_SILVER_ID>",
+          "workspaceId": "<WORKSPACE_ID>"
+        }
+      },
+      {
+        "name": "NB03_Gold",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "NB02_Silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:20:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "<NOTEBOOK_GOLD_ID>",
+          "workspaceId": "<WORKSPACE_ID>"
+        }
+      },
+      {
+        "name": "Correo_Fallo_Bronze",
+        "type": "Office365Email",
+        "dependsOn": [
+          {
+            "activity": "NB01_Bronze",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:02:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": true,
+          "secureInput": true
+        },
+        "typeProperties": {
+          "from": "tu.cuenta@example.com",
+          "to": "tu.cuenta@example.com",
+          "subject": "[CoinGecko] ERROR Bronze · Charla01",
+          "body": "Falló la etapa Bronze; las etapas siguientes no se han ejecutado. Id de ejecución: @{pipeline().RunId}. Consulta Monitor en tu workspace de réplica."
+        },
+        "externalReferences": {
+          "connection": "<OUTLOOK_CONNECTION_ID>"
+        }
+      },
+      {
+        "name": "Correo_Fallo_Silver",
+        "type": "Office365Email",
+        "dependsOn": [
+          {
+            "activity": "NB02_Silver",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:02:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": true,
+          "secureInput": true
+        },
+        "typeProperties": {
+          "from": "tu.cuenta@example.com",
+          "to": "tu.cuenta@example.com",
+          "subject": "[CoinGecko] ERROR Silver · Charla01",
+          "body": "Falló la etapa Silver; las etapas siguientes no se han ejecutado. Id de ejecución: @{pipeline().RunId}. Consulta Monitor en tu workspace de réplica."
+        },
+        "externalReferences": {
+          "connection": "<OUTLOOK_CONNECTION_ID>"
+        }
+      },
+      {
+        "name": "Correo_Fallo_Gold",
+        "type": "Office365Email",
+        "dependsOn": [
+          {
+            "activity": "NB03_Gold",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:02:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": true,
+          "secureInput": true
+        },
+        "typeProperties": {
+          "from": "tu.cuenta@example.com",
+          "to": "tu.cuenta@example.com",
+          "subject": "[CoinGecko] ERROR Gold · Charla01",
+          "body": "Falló la etapa Gold; las etapas siguientes no se han ejecutado. Id de ejecución: @{pipeline().RunId}. Consulta Monitor en tu workspace de réplica."
+        },
+        "externalReferences": {
+          "connection": "<OUTLOOK_CONNECTION_ID>"
+        }
+      },
+      {
+        "name": "Correo_Exito_Final",
+        "type": "Office365Email",
+        "dependsOn": [
+          {
+            "activity": "NB03_Gold",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.00:02:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": true,
+          "secureInput": true
+        },
+        "typeProperties": {
+          "from": "tu.cuenta@example.com",
+          "to": "tu.cuenta@example.com",
+          "subject": "[CoinGecko] OK · Charla01",
+          "body": "La carga completa terminó correctamente. Etapa final: Gold. Id de ejecución: @{pipeline().RunId}. Consulta Monitor en tu workspace de réplica."
+        },
+        "externalReferences": {
+          "connection": "<OUTLOOK_CONNECTION_ID>"
+        }
+      }
+    ]
+  }
+}

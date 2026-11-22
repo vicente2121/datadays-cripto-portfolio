@@ -1,0 +1,31 @@
+relationship 'Mercado - Activos'
+	fromColumn: Mercado.activo_key
+	toColumn: Activos.activo_key
+
+relationship 'Mercado - Fechas'
+	fromColumn: Mercado.fecha_key
+	toColumn: Fechas.fecha_key
+
+relationship 'Mercado - Lotes'
+	fromColumn: Mercado.lote_key
+	toColumn: Lotes.lote_key
+
+relationship 'Ejecuciones - Fechas'
+	fromColumn: Ejecuciones.fecha_key
+	toColumn: Fechas.fecha_key
+
+relationship 'Ejecuciones - Lotes'
+	fromColumn: Ejecuciones.lote_key
+	toColumn: Lotes.lote_key
+
+relationship 'Controles - Reglas de calidad'
+	fromColumn: Controles.control_key
+	toColumn: 'Reglas de calidad'.control_key
+
+relationship 'Controles - Fechas'
+	fromColumn: Controles.fecha_key
+	toColumn: Fechas.fecha_key
+
+relationship 'Controles - Lotes'
+	fromColumn: Controles.lote_key
+	toColumn: Lotes.lote_key

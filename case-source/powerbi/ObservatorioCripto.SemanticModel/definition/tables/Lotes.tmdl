@@ -1,0 +1,85 @@
+/// Dimensión Lote: una fila por batch_id publicado. Contexto común a los hechos, sin conteos.
+table Lotes
+
+	/// Extracción original. Los históricos sin evidencia de esa fecha permanecen nulos.
+	measure 'Extracción UTC' = FORMAT(MAX('Lotes'[extraido_utc]), "yyyy-MM-dd HH:mm:ss")
+		formatString: @
+		displayFolder: Fechas
+
+	/// Hora UTC registrada de publicación del lote seleccionado.
+	measure 'Última publicación UTC' = FORMAT(MAX('Lotes'[fin_utc]), "yyyy-MM-dd HH:mm:ss")
+		formatString: @
+		displayFolder: Fechas
+
+	column lote_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: lote_key
+
+	column batch_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: batch_id
+
+	column inicio_utc
+		dataType: dateTime
+		formatString: yyyy-MM-dd HH:mm:ss
+		summarizeBy: none
+		sourceColumn: inicio_utc
+
+	column fin_utc
+		dataType: dateTime
+		formatString: yyyy-MM-dd HH:mm:ss
+		summarizeBy: none
+		sourceColumn: fin_utc
+
+	column extraido_utc
+		dataType: dateTime
+		formatString: yyyy-MM-dd HH:mm:ss
+		summarizeBy: none
+		sourceColumn: extraido_utc
+
+	column estado
+		dataType: string
+		summarizeBy: none
+		sourceColumn: estado
+
+	column moneda
+		dataType: string
+		summarizeBy: none
+		sourceColumn: moneda
+
+	column modo_datos
+		dataType: string
+		summarizeBy: none
+		sourceColumn: modo_datos
+
+	column entorno
+		dataType: string
+		summarizeBy: none
+		sourceColumn: entorno
+
+	column origen
+		dataType: string
+		summarizeBy: none
+		sourceColumn: origen
+
+	column ruta_bronze
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: ruta_bronze
+
+	column es_actual
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: es_actual
+
+	partition Lotes = entity
+		mode: directLake
+		source
+			entityName: dim_lote
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

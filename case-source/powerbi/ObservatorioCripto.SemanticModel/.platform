@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "SM01_ObservatorioCripto"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "935e7d67-7c47-5385-a081-38998fffdb60"
+  }
+}

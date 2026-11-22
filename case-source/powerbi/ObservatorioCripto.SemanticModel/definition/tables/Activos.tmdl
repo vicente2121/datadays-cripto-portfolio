@@ -1,0 +1,31 @@
+/// Dimensión Activo tipo 1: una fila por coin_id de la muestra actual, sin métricas de mercado.
+table Activos
+
+	column activo_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: activo_key
+
+	column coin_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: coin_id
+
+	column nombre
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nombre
+
+	column simbolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: simbolo
+
+	partition Activos = entity
+		mode: directLake
+		source
+			entityName: dim_activo
+			schemaName: gold
+			expressionSource: 'Origen OneLake'

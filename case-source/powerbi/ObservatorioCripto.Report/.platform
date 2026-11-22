@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RP01_ObservatorioCripto"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7abfdc89-3882-5694-acb2-4f777ecb0195"
+  }
+}

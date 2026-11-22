@@ -1,0 +1,59 @@
+/// Hecho de calidad: una fila por regla y lote actual, con observado, referencia y resultado.
+table Controles
+
+	/// Valor del control y lote seleccionados; sin total entre reglas de unidades distintas.
+	measure Observado = IF(HASONEVALUE('Reglas de calidad'[control_key]) && HASONEVALUE('Lotes'[lote_key]), SELECTEDVALUE('Controles'[observados]))
+		formatString: 0
+		displayFolder: Calidad
+
+	/// Valor del control y lote seleccionados; sin total entre reglas de unidades distintas.
+	measure Referencia = IF(HASONEVALUE('Reglas de calidad'[control_key]) && HASONEVALUE('Lotes'[lote_key]), SELECTEDVALUE('Controles'[umbral]))
+		formatString: 0
+		displayFolder: Calidad
+
+	column resultado
+		dataType: string
+		summarizeBy: none
+		sourceColumn: resultado
+
+	column observados
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: observados
+
+	column umbral
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: umbral
+
+	column control_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: control_key
+
+	column lote_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: lote_key
+
+	column fecha_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+	partition Controles = entity
+		mode: directLake
+		source
+			entityName: fact_controles_actuales
+			schemaName: gold
+			expressionSource: 'Origen OneLake'
