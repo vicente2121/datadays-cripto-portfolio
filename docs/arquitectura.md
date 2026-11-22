@@ -15,7 +15,8 @@ flowchart LR
   F --> G[gold.fact_mercado_actual<br/>y dimensiones]
   G --> H[SM01_ObservatorioCripto<br/>Direct Lake]
   H --> I[Informe Power BI]
-  H --> J[Informe dentro de la Fabric App]
+  H --> J[Conector Rayfin<br/>DAX delegado]
+  J --> K[Informe dentro de la Fabric App]
 ```
 
 | Tramo | Entrada | Salida | Comprobación |
@@ -44,6 +45,9 @@ erDiagram
 Las ocho relaciones del modelo son activas y filtran en una dirección. `Trazabilidad` queda desconectada porque documenta criterios, no hechos de mercado. El portafolio y el informe consultan el modelo publicado `SM01_ObservatorioCripto`; el código original y las definiciones adaptadas están en [`case-source/`](../case-source/) y [`fabric/`](../fabric/).
 
 ## Informe dentro de la Fabric App
+
+El conector Rayfin de este caso consulta el modelo con la identidad delegada del usuario. Rayfin publicó su puente UserDataFunction en la misma carpeta de Fabric; el código de la app y el alias del conector están en este repositorio.
+
 
 La pestaña **Informe** consulta `SM01_ObservatorioCripto` con Rayfin y permisos delegados. Las consultas DAX están en [`packages/frontend/src/queries/report/`](../packages/frontend/src/queries/report/). El panel presenta activos observados, concentración top 10, filas aceptadas y rechazadas; compara la capitalización y la variación de 24 horas de los diez líderes. Usa el lote actual para evitar mezclar fotografías.
 

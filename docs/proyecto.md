@@ -9,7 +9,7 @@
 | Workspace DEV | `DataDays-FabricApps-Portfolio-DEV` · `0245bb51-e0d1-40f1-b071-fcbbf1d7b155` |
 | Carpeta Fabric | `01-Criptomonedas` · `acb942f4-e548-429a-8673-78fd486b674d` |
 | App Rayfin | `datadays-cripto-portfolio` · `13f00121-db38-48c1-bd27-a393cb746eb4` |
-| Elementos de este caso | `DD01_LH_Cripto`, `DD01_NB_Bronze`, `DD01_NB_Silver`, `DD01_NB_Gold`, `DD01_PL_CoinGecko`, `SM01_ObservatorioCripto`, `DD01_Informe_ObservatorioCripto` |
+| Elementos de este caso | `DD01_LH_Cripto`, `DD01_NB_Bronze`, `DD01_NB_Silver`, `DD01_NB_Gold`, `DD01_PL_CoinGecko`, `SM01_ObservatorioCripto`, `DD01_Informe_ObservatorioCripto`, `datadays_cripto_portfolio_connector` |
 | Acceso | Fabric SSO; informe integrado por conector delegado al modelo Direct Lake, sin datos propios ni roles de app |
 | Cuenta del desarrollador | `juanvicente@ajmvicente21hotmail.onmicrosoft.com` |
 | Sincronización Git del workspace | Desactivada; las publicaciones se hacen con CLI/API y los repositorios se mantienen separados |
@@ -33,6 +33,7 @@ Solo se crean o modifican los elementos enumerados arriba y la app de esta ficha
 | Pipeline | `91974a03-c920-48c3-9370-94b4f0ad8bd3` |
 | Modelo Direct Lake | `df6d3273-def7-43a6-ade1-e40932b9ad01` |
 | Informe | `eddcc051-24e7-47ed-b95b-10408e2c7890` |
+| Conector Rayfin (UserDataFunction) | `e08eff04-b1cd-4b08-abed-d8497e68af13` |
 
 ## Informe en la app
 
