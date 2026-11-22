@@ -14,6 +14,7 @@ Fabric App tipo portafolio del caso 01 de DP-600: una fotografía de mercado de 
 | [`case-source/powerbi/`](case-source/powerbi/) | PBIP con informe PBIR y modelo TMDL Direct Lake |
 | [`fabric/`](fabric/) | Copias de despliegue enlazadas al Lakehouse y modelo publicados |
 | [`case-source/preguntas_de_negocio.md`](case-source/preguntas_de_negocio.md) | Requisitos, reglas y criterios de aceptación |
+| [`docs/arquitectura.md`](docs/arquitectura.md) | Flujo fuente → Bronze → Silver → Gold → modelo, con diagramas y relaciones |
 | [`docs/proyecto.md`](docs/proyecto.md) | Workspace, carpeta e inventario de recursos de esta app |
 
 La fuente de los artefactos es el [repositorio general de Data Days](https://github.com/vicente2121/DATADAYS_DP600/tree/main/charla01/caso_01_snapshot_diario_criptomonedas). Esta copia permite presentar el caso de forma independiente; el workspace de Fabric **no está sincronizado con Git**.
@@ -37,3 +38,7 @@ npm run dev
 ```
 
 Consulta [`docs/rayfin-template.md`](docs/rayfin-template.md) para la estructura y los comandos de la plantilla oficial. La réplica del caso de datos sigue [`case-source/preguntas_de_negocio.md`](case-source/preguntas_de_negocio.md).
+
+## Informe dentro de la Fabric App
+
+La sección **Informe** consulta el modelo semántico publicado con el conector delegado de Rayfin. Muestra cuatro indicadores y dos gráficas basados en consultas DAX verificadas, con estado de carga y errores visibles. Consulta [las consultas y los visuales](packages/frontend/src/queries/report/) y el [mapa de datos](docs/arquitectura.md). El informe de Power BI enlazado arriba ofrece las páginas analíticas completas.

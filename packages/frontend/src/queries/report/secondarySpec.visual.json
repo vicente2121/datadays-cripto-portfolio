@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "Nombre",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "x": {
+      "field": "Variacion24h",
+      "type": "quantitative",
+      "title": "Cambio en 24 h",
+      "axis": {
+        "format": "+.1%"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Nombre",
+        "type": "nominal",
+        "title": "Activo"
+      },
+      {
+        "field": "Variacion24h",
+        "type": "quantitative",
+        "title": "Variación 24 h",
+        "format": "+.2%"
+      }
+    ]
+  }
+}

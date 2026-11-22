@@ -10,7 +10,7 @@
 | Carpeta Fabric | `01-Criptomonedas` · `acb942f4-e548-429a-8673-78fd486b674d` |
 | App Rayfin | `datadays-cripto-portfolio` · `13f00121-db38-48c1-bd27-a393cb746eb4` |
 | Elementos de este caso | `DD01_LH_Cripto`, `DD01_NB_Bronze`, `DD01_NB_Silver`, `DD01_NB_Gold`, `DD01_PL_CoinGecko`, `SM01_ObservatorioCripto`, `DD01_Informe_ObservatorioCripto` |
-| Acceso | Fabric SSO; portafolio documental sin datos propios ni roles de app |
+| Acceso | Fabric SSO; informe integrado por conector delegado al modelo Direct Lake, sin datos propios ni roles de app |
 | Cuenta del desarrollador | `juanvicente@ajmvicente21hotmail.onmicrosoft.com` |
 | Sincronización Git del workspace | Desactivada; las publicaciones se hacen con CLI/API y los repositorios se mantienen separados |
 
@@ -33,6 +33,10 @@ Solo se crean o modifican los elementos enumerados arriba y la app de esta ficha
 | Pipeline | `91974a03-c920-48c3-9370-94b4f0ad8bd3` |
 | Modelo Direct Lake | `df6d3273-def7-43a6-ade1-e40932b9ad01` |
 | Informe | `eddcc051-24e7-47ed-b95b-10408e2c7890` |
+
+## Informe en la app
+
+La sección Informe lee el modelo semántico de esta ficha mediante consultas DAX en packages/frontend/src/queries/report/. El acceso se delega al usuario autenticado. El recorrido técnico y las relaciones están en [arquitectura.md](arquitectura.md).
 
 ## Riesgos para producción
 

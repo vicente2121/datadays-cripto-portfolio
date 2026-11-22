@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "Nombre",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "x": {
+      "field": "CapitalizacionUSD",
+      "type": "quantitative",
+      "title": "USD",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Nombre",
+        "type": "nominal",
+        "title": "Activo"
+      },
+      {
+        "field": "CapitalizacionUSD",
+        "type": "quantitative",
+        "title": "Capitalización USD",
+        "format": ",.0f"
+      }
+    ]
+  }
+}

@@ -30,3 +30,14 @@ services:
     enabled: false
   functions:
     enabled: false
+connectors:
+  - name: criptomodel
+    type: fabric-semanticmodel
+    config:
+      workspaceId: 0245bb51-e0d1-40f1-b071-fcbbf1d7b155
+      itemId: df6d3273-def7-43a6-ade1-e40932b9ad01
+    auth:
+      type: delegated
+    version: "1"
+    operations:
+      - name: executeQuery

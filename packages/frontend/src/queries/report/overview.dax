@@ -1,0 +1,9 @@
+EVALUATE
+ROW(
+  "Activos", CALCULATE([Activos], 'Lotes'[es_actual] = TRUE()),
+  "CapitalizacionUSD", CALCULATE([Capitalización USD], 'Lotes'[es_actual] = TRUE()),
+  "ConcentracionTop10", CALCULATE([Concentración top 10], 'Lotes'[es_actual] = TRUE()),
+  "FilasAceptadas", CALCULATE([Filas aceptadas], 'Lotes'[es_actual] = TRUE()),
+  "FilasRechazadas", CALCULATE([Filas rechazadas], 'Lotes'[es_actual] = TRUE()),
+  "PublicacionUTC", CALCULATE([Última publicación UTC], 'Lotes'[es_actual] = TRUE())
+)

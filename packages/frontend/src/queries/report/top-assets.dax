@@ -1,0 +1,12 @@
+EVALUATE
+TOPN(
+  10,
+  SUMMARIZECOLUMNS(
+    'Activos'[nombre],
+    'Activos'[simbolo],
+    TREATAS({TRUE()}, 'Lotes'[es_actual]),
+    "CapitalizacionUSD", [Capitalización USD],
+    "Variacion24h", [Variación 24h]
+  ),
+  [CapitalizacionUSD], DESC
+)
